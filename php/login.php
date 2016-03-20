@@ -9,6 +9,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
 	if (!$database->isConnected()) {
 		header('Location: ../connectionerror.html');
+		exit;
 	}
 
 	$username = $_POST['username'];
@@ -25,6 +26,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 			$_SESSION['database'] = $database;
 			$_SESSION['username'] = $username;
 			header('Location: calendar.php');
+			exit;
 		}
 	}
 
