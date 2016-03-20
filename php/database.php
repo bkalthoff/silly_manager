@@ -1,24 +1,24 @@
 <?php
 
 class Database {
-	private $host;
-	private $username;
-	private $password;
-	private $database;
+	private $db_host;
+	private $db_username;
+	private $db_password;
+	private $db_database;
 	private $conn;
 
-	public function __construct($host, $username, $password, $database) {
-		$this->host = $host;
-		$this->username = $username;
-		$this->password = $password;
-		$this->database = $database;
+	public function __construct($db_host, $db_username, $db_password, $db_database) {
+		$this->db_host = $db_host;
+		$this->db_username = $db_username;
+		$this->db_password = $db_password;
+		$this->db_database = $db_database;
 	}
 
 	public function openConnection() {
 		try {
 			$this->conn = new PDO("mysql:host=$this->host;dbname=$this->database", 
-				$this->username, 
-				$this->password);
+				$this->db_username, 
+				$this->db_password);
 			$this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		} catch (PDOException $e) {
 			print "Error: " . $e->getMessage() . "<br>";
