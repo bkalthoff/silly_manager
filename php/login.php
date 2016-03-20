@@ -8,30 +8,34 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 	$database->openConnection();
 
 	if (!$database->isConnected()) {
-		header('Location: ../connectionerror.html');
-		exit;
+		die(header('location: ../connectionerror.html'));
 	}
 
 	$username = $_POST['username'];
 	$password = $_POST['password'];
 
+	if (strlen($username) == 0 || strlen($password) == 0) {
+		$database->closeConnection();
+		die(header("location: ../index.php?blank=true"));
+	}
+
 	$sql = 'SELECT username, password, salt FROM users WHERE username = ?';
 	$result = $database->executeQuery($sql, array($username));
 
-	if (mysql_num_rows($result) > 0) {
+	if ($result != false) {
 		$pwhash = $database->passwordHash($password, $result[0]['salt']);
 
 		if ($pwhash === $result[0]['password']) {
 			session_start();
 			$_SESSION['database'] = $database;
 			$_SESSION['username'] = $username;
-			header('Location: calendar.php');
+			header('location: calendar.php');
 			exit;
 		}
 	}
 
-	echo 'Invalid credentials.';
 	$database->closeConnection();
+	die(header("location: ../index.php?failed=true"));
 }
 
 ?>

@@ -24,6 +24,15 @@
 				</div>
 				<div class="form-group">
 					<button type="submit" class="btn btn-md btn-primary">Login</button>
+<?php
+
+if ($_GET['blank']) {
+	echo '<div class="alert alert-danger fade in">Blank fields.</div>';
+} else if ($_GET['failed']) {
+	echo '<div class="alert alert-danger fade in">Invalid credentials.</div>';
+}
+
+?>
 				</div>
 			</form>
 		</div>
