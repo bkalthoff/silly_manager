@@ -1,0 +1,16 @@
+h1 {
+	margin: 5px;
+	text-align: center;
+}
+
+#login {
+	text-align: center;
+}
+
+#login form {
+	display: inline-block;
+}
+
+#login form .btn {
+	width: 100%;
+}
