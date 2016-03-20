@@ -39,17 +39,43 @@ class Database {
 
 	private function executeQuery($query, $param = null) {
 		try {
+			$stmt = $this->conn->prepare($query);
+			$stmt->execute($param);
+			$result = $stmt->fetchAll();
 		} catch (PDOException $e) {
-			print "Error: " . $e->getMessage() . "<br>";
+			$error = "*** Internal error: " . $e->getMessage() . "\n query: " . $query;
+			die($error);
 		}
 	}
 
-	public function registerUser($username, $password, $email) {
+	private function passwordHash($password, $salt) {
+		return hash("SHA512", $salt . $password);
+	}
 
+	public function registerUser($username, $password, $email, $fname, $sname) {
+		$sql = "INSERT INTO users VALUES(?, ?, ?, ?, ?, ?)";
+		$salt = mcrypt_create_iv(16);
+		$result = $this->executeQuery($sql, array($username, passwordHash($password, $salt), $salt, $email, $fname, $sname));
+
+		if ($result) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public function authenticateUser($username, $password) {
-		$sql = "SELECT username FROM users WHERE username = ? AND password = ?";
+		$sql = "SELECT username FROM users WHERE username = ?";
+		$result = $this->executeQuery($sql, array($username));
+
+		if (mysql_num_rows($result) > 0) {
+			$pwhash = passwordHash($password, $result[0]['salt']);
+
+			if ($pwhash === $result[0]['password']) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
 

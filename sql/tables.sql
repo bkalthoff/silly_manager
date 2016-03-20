@@ -3,6 +3,10 @@ DROP TABLE IF EXISTS dishes, meals, users;
 CREATE TABLE users (
 	username VARCHAR(25),
 	password VARCHAR(128) UNIQUE NOT NULL,
+	salt VARCHAR(16) UNIQUE NOT NULL,
+	email VARCHAR(255) UNIQUE NOT NULL,
+	fname VARCHAR(35) NOT NULL,
+	sname VARCHAR(35) NOT NULL,
 	PRIMARY KEY(username)
 );
 
