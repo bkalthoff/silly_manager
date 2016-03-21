@@ -1,6 +1,8 @@
 <?php
 session_start();
+
 require('../php/get_groups.php');
+
 $username = $_SESSION['username'];
 $session = $_SESSION;
 ?>

@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 if (isset($_POST['username']) && isset($_POST['password'])) {
 	require_once('database.php');
@@ -26,7 +27,6 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 		$pwhash = $database->passwordHash($password, $result[0]['salt']);
 
 		if ($pwhash === $result[0]['password']) {
-			session_start();
 			$_SESSION['database'] = $database;
 			$_SESSION['username'] = $username;
 			header('location: ../pages/groups.php');

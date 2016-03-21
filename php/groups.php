@@ -1,10 +1,11 @@
 <?php
+session_start();
 
 require_once('database.php');
 
-session_start();
-
 $username = $_SESSION['username'];
+
+echo var_dump($_SESSION);
 
 if (isset($username)) {
 	$groups = false;
