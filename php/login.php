@@ -29,7 +29,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 			session_start();
 			$_SESSION['database'] = $database;
 			$_SESSION['username'] = $username;
-			header('location: groups.php');
+			header('location: ../pages/groups.php');
 			exit;
 		}
 	}

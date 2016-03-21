@@ -1,6 +1,8 @@
 <?php
-session_start();
+
 require_once('database.php');
+
+session_start();
 
 $username = $_SESSION['username'];
 
