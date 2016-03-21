@@ -16,7 +16,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
 	if (strlen($username) == 0 || strlen($password) == 0) {
 		$database->closeConnection();
-		die(header("location: ../index.php?blank=true"));
+		die(header('location: ../index.php?blank=true'));
 	}
 
 	$sql = 'SELECT username, password, salt FROM users WHERE username = ?';
@@ -29,13 +29,13 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 			session_start();
 			$_SESSION['database'] = $database;
 			$_SESSION['username'] = $username;
-			header('location: calendar.php');
+			header('location: groups.php');
 			exit;
 		}
 	}
 
 	$database->closeConnection();
-	die(header("location: ../index.php?failed=true"));
+	die(header('location: ../index.php?failed=true'));
 }
 
 ?>
