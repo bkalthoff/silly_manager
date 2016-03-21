@@ -6,13 +6,7 @@ require_once('database.php');
 $username = $_SESSION['username'];
 
 if (isset($username)) {
-	$groups = false;
-
-	$database = $_SESSION['database'];
-
-	if (!$database->isConnected()) {
-		$database->openConnection();
-	}
+	$database = new Database();
 
 	$sql = 'SELECT groupname, leader FROM memberships WHERE username = ?';
 	$result = $database->executeQuery($sql, array($username));

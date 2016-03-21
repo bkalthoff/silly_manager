@@ -3,21 +3,15 @@ session_start();
 
 if (isset($_POST['username']) && isset($_POST['password'])) {
 	require_once('database.php');
-	require_once('connect_data.php');
 
-	$database = new Database($db_host, $db_username, $db_password, $db_database);
-	$database->openConnection();
-
-	if (!$database->isConnected()) {
-		die(header('location: ../connectionerror.html'));
-	}
+	$database = new Database();
 
 	$username = $_POST['username'];
 	$password = $_POST['password'];
 
 	if (strlen($username) == 0 || strlen($password) == 0) {
-		$database->closeConnection();
-		die(header('location: ../index.php?blank=true'));
+		header('location: ../index.php?blank=true');
+		exit;
 	}
 
 	$sql = 'SELECT username, password, salt FROM users WHERE username = ?';
@@ -29,13 +23,13 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 		if ($pwhash === $result[0]['password']) {
 			$_SESSION['database'] = $database;
 			$_SESSION['username'] = $username;
-			header('location: ../pages/groups.php');
+			header('location: ../groups.php');
 			exit;
 		}
 	}
 
-	$database->closeConnection();
-	die(header('location: ../index.php?failed=true'));
+	header('location: ../index.php?failed=true');
+	exit;
 }
 
 ?>
