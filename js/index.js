@@ -69,24 +69,20 @@ $('#btn-register').click(function() {
 function swapRegForm(register) {
 	if (register) {
 		$('.form-login').hide();
-		$('.form-register').show();
+		$('#form-register').trigger('reset');
+		$('.form-register').slideDown(200);
 	} else {
 		$('.form-register').hide();
-		$('.form-login').show();
+		$('#form-login').trigger('reset');
+		$('.form-login').slideDown(200);
 	}
 	return false;
 }
 
 $('#btn-swapto-register').click(function() {
-	swapRegForm(true);
-	//$('.form-login').hide();
-	//$('.form-register').show();
-	return false;
+	return swapRegForm(true);
 });
 
 $('#btn-swapto-login').click(function() {
-	swapRegForm(false);
-	//$('.form-register').hide();
-	//$('.form-login').show();
-	return false;
+	return swapRegForm(false);
 });
