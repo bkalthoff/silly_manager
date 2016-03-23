@@ -9,27 +9,49 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 	$username = $_POST['username'];
 	$password = $_POST['password'];
 
+	$response = [];
+	$invalidCreds = false;
+
 	if (strlen($username) == 0 || strlen($password) == 0) {
-		header('location: ../index.php?blank=true');
-		exit;
-	}
+		$response = [
+			'error' => true,
+			'msg' => 'Blank fields.'
+		];
+	} else {
+		$query = 'SELECT password, salt FROM users WHERE username = ?';
+		$result = $database->executeQuery($query, array($username));
 
-	$sql = 'SELECT username, password, salt FROM users WHERE username = ?';
-	$result = $database->executeQuery($sql, array($username));
+		if (!empty($result)) {
+			$pwhash = $database->passwordHash($password, $result[0]['salt']);
 
-	if ($result != false) {
-		$pwhash = $database->passwordHash($password, $result[0]['salt']);
-
-		if ($pwhash === $result[0]['password']) {
-			$_SESSION['database'] = $database;
-			$_SESSION['username'] = $username;
-			header('location: ../groups.php');
-			exit;
+			if ($pwhash === $result[0]['password']) {
+				$_SESSION['username'] = $username;
+				$response['error'] = false;
+			} else {
+				$invalidCreds = true;
+			}
+		} else {
+			$invalidCreds = true;
 		}
 	}
 
-	header('location: ../index.php?failed=true');
-	exit;
+	if ($invalidCreds == true) {
+		$response = [
+			'error' => true,
+			'msg' => 'Invalid credentials.'
+		];
+	}
+
+	header('Content-Type: application/json');
+	echo json_encode($response);
+} else {
+	$response = [
+		'error' => true,
+		'msg' => 'Fatal error, missing parameters.'
+	];
+
+	header('Content-Type: application/json');
+	echo json_encode($response);
 }
 
 ?>

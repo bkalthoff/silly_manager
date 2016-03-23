@@ -40,24 +40,21 @@ class Database {
 		return $result;
 	}
 
+	public function executeUpdate($query, $param = null) {
+		$result = false;
+		try {
+			$stmt = $this->getConnection()->prepare($query);
+			$result = $stmt->execute($param);
+		} catch (PDOException $e) {
+			$error = "*** Internal error: " . $e->getMessage() . "\n query: " . $query;
+			die($error);
+		}
+		return $result;
+	}
+
 	public function passwordHash($password, $salt) {
 		return hash("SHA512", $salt . $password);
 	}
-
-	/*
-	public function registerUser($username, $password, $email, $fname, $sname) {
-		$sql = "INSERT INTO users VALUES(?, ?, ?, ?, ?, ?)";
-		$salt = base64_encode(mcrypt_create_iv(12));
-		print_r('SALTY: ' . $salt);
-		$result = $this->executeQuery($sql, array($username, $this->passwordHash($password, $salt), $salt, $email, $fname, $sname));
-
-		if ($result) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	 */
 }
 
 ?>

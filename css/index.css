@@ -1,0 +1,20 @@
+h1 {
+	margin: 5px;
+	text-align: center;
+}
+
+.form-register {
+	display: none;
+}
+
+#container {
+	text-align: center;
+	width: 25%;
+	margin: 0 auto;
+}
+
+#container form .btn {
+	width: 50%;
+	margin-bottom: 15px;
+	float: left;
+}
