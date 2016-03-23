@@ -14,10 +14,9 @@ $groups = $_SESSION['groups'];
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-		<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-		<link href="css/sm.css" rel="stylesheet">
-		<script src="bower_components/jquery/dist/jquery.min.js"></script>
-		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/general.css" rel="stylesheet">
+		<link href="css/groups.css" rel="stylesheet">
 
 		<title>Silly Manager</title>
 	</head>
@@ -33,5 +32,8 @@ foreach($groups as $group) {
 ?>
 			<li role="presentation"><a href="#"> + </a></li>
 		</ul>
+
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
 	</body>
 </html>
