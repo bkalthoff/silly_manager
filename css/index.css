@@ -1,21 +1,18 @@
 h1 {
-	margin: 0 5px;
-	text-align: center;
+  margin: 0 5px;
+  text-align: center;
 }
-
 .form-register {
-	display: none;
+  display: none;
 }
-
 #forms {
-	text-align: center;
-	width: 66%;
-	margin: 0 auto;
+  text-align: center;
+  width: 66%;
+  margin: 0 auto;
 }
-
 #forms form .btn {
-	width: 50%;
-	height: 66px;
-	margin-bottom: 15px;
-	float: left;
+  width: 50%;
+  height: 66px;
+  margin-bottom: 15px;
+  float: left;
 }
