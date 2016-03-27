@@ -1,0 +1,19 @@
+#container {
+    text-align: center;
+}
+#groups {
+    text-align: center;
+    width: 66%;
+    margin: 10px auto;
+}
+.btn {
+    margin-bottom: 15px;
+}
+#groups button {
+    width: 100%;
+}
+.forms .btn {
+    width: 50%;
+    height: 66px;
+    float: left;
+}

@@ -10,7 +10,7 @@ session_start();
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-		<link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+		<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/general.css" rel="stylesheet">
 		<link href="css/index.css" rel="stylesheet">
@@ -21,7 +21,7 @@ session_start();
 		<div id="container">
 			<h1>Silly Manager</h1>
 			<br>
-			<div id="forms">
+			<div class="forms">
 				<form method="post" id="form-login" class="form-horizontal text-center">
 					<div class="form-group form-login">
 						<input type="text" class="form-control" name="username" placeholder="Username">
